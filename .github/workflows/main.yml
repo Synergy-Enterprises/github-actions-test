@@ -1,14 +1,19 @@
-name: Main Workflow
+name: Deploy to Main
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  deploy:
+    if: contains('tharaka911 virajjayarathna', github.actor)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Run Test Script
-        run: bash scripts/test.sh
+      - name: Deploy Application
+        run: |
+          echo "Deploying application..."
